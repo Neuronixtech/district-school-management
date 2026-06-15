@@ -315,7 +315,7 @@ const [
           </div>
 
           <div>
-            💰 ₹45L Collection
+            📈 Real-Time Analytics
           </div>
 
         </div>
@@ -326,16 +326,15 @@ const [
 
     {/* RIGHT LOGIN */}
 
-    <div
-      style={{
-        width: "500px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        padding: "40px",
-        zIndex: 2
-      }}
-    >
+   <div
+  style={{
+    width: "450px",
+    display: "flex",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    marginRight: "160px"
+  }}
+>
 
       <div
         style={{
@@ -472,7 +471,7 @@ const [
       display: "flex",
       alignItems: "center",
       gap: "8px",
-      color: "#fff"
+      color: "yellow"
     }}
   >
     <input
@@ -490,7 +489,7 @@ const [
 
   <span
     style={{
-      color: "#fff",
+      color: "yellow",
       cursor: "pointer",
       textDecoration:
         "underline"
@@ -523,27 +522,33 @@ const [
             Login
           </button>
 
+          <p
+  style={{
+    textAlign: "center",
+    marginTop: "15px"
+  }}
+>
+  Don't have an account?{" "}
+  <span
+    style={{
+      color: "yellow",
+      cursor: "pointer",
+      fontWeight: "600"
+    }}
+    onClick={() =>
+      navigate("/register")
+    }
+  >
+    Create Account
+  </span>
+</p>
+
         </form>
 
       </div>
 
     </div>
-    <p
-  onClick={() =>
-    setShowForgotPassword(
-      true
-    )
-  }
-  style={{
-    cursor: "pointer",
-    color: "#2563EB",
-    fontWeight: "600",
-    fontSize: "15px"
-  }}
->
-  Forgot Password?
-</p>
-
+  
   </div>
 );
 }
