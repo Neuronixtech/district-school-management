@@ -69,6 +69,7 @@ import Profile from "../pages/profile/Profile";
 import ProtectedRoute from "../components/ProtectedRoute";
 
 import ForgotPassword from "../pages/auth/ForgotPassword";
+import Register from "../pages/auth/Register";
 
 function AppRoutes() {
   return (
@@ -83,6 +84,11 @@ function AppRoutes() {
   element={
     <ForgotPassword />
   }
+/>
+
+<Route
+  path="/register"
+  element={<Register />}
 />
 
         {/* DASHBOARD */}
