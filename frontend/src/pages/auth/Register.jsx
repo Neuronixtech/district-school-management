@@ -5,6 +5,7 @@ import {
   FaEye,
   FaEyeSlash
 } from "react-icons/fa";
+import { toast } from "react-toastify";
 
 function Register() {
 
@@ -24,14 +25,6 @@ function Register() {
     setConfirmPassword] =
     useState("");
 
-  const [showPassword,
-    setShowPassword] =
-    useState(false);
-
-  const [showConfirmPassword,
-  setShowConfirmPassword] =
-  useState(false);
-
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -40,20 +33,26 @@ function Register() {
     });
   };
 
+  showRegisterPassword
+setShowRegisterPassword
+
+showRegisterConfirmPassword
+setShowRegisterConfirmPassword
+
   const handleSubmit =
     async (e) => {
 
       e.preventDefault();
 
       if (
-        formData.password !==
-        confirmPassword
-      ) {
-        alert(
-          "Passwords do not match"
-        );
-        return;
-      }
+  formData.password !==
+  confirmPassword
+) {
+  toast.error(
+    "Passwords do not match"
+  );
+  return;
+}
 
       try {
 
@@ -62,19 +61,18 @@ function Register() {
           formData
         );
 
-        alert(
-          "Account Created Successfully"
-        );
+       toast.success(
+  "Account Created Successfully"
+);
 
         navigate("/");
 
       } catch (error) {
 
-        alert(
-          error.response?.data
-            ?.message ||
-          "Registration Failed"
-        );
+        toast.error(
+  error.response?.data?.message ||
+  "Registration Failed"
+);
       }
     };
 
@@ -226,33 +224,30 @@ function Register() {
         {/* Password */}
 
         <div
-          style={{
-            position:
-              "relative",
-            marginBottom:
-              "15px"
-          }}
-        >
-          <input
-            type={
-              showPassword
-                ? "text"
-                : "password"
-            }
-            name="password"
-            placeholder="Password"
-            onChange={
-              handleChange
-            }
-            required
-            style={{
-              ...inputStyle,
-              marginBottom: 0
-            }}
-          />
+  style={{
+    position: "relative",
+    marginBottom: "15px"
+  }}
+>
+  <input
+  type={
+    showPassword
+      ? "text"
+      : "password"
+  }
+  name="password"
+  placeholder="Password"
+  value={formData.password}
+  onChange={handleChange}
+  required
+  style={{
+    ...popupInput,
+    marginBottom: 0
+  }}
+/>
 
-          <span
-           onMouseDown={() =>
+  <span
+    onMouseDown={() =>
       setShowPassword(true)
     }
     onMouseUp={() =>
@@ -261,26 +256,23 @@ function Register() {
     onMouseLeave={() =>
       setShowPassword(false)
     }
-            style={{
-              position:
-                "absolute",
-              right: "15px",
-              top: "50%",
-              transform:
-                "translateY(-50%)",
-              cursor:
-                "pointer"
-            }}
-          >
-            {showPassword
-              ? <FaEyeSlash />
-              : <FaEye />}
-          </span>
-        </div>
+    style={{
+      position: "absolute",
+      right: "15px",
+      top: "50%",
+      transform:
+        "translateY(-50%)",
+      cursor: "pointer",
+      color: "#4F46E5"
+    }}
+  >
+    {showPassword
+      ? <FaEyeSlash />
+      : <FaEye />}
+  </span>
+</div>
 
-        {/* Confirm Password */}
-
-       <div
+<div
   style={{
     position: "relative",
     marginBottom: "15px"
@@ -293,18 +285,61 @@ function Register() {
         : "password"
     }
     placeholder="Confirm Password"
-    value={confirmPassword}
-    onChange={(e) =>
-      setConfirmPassword(
-        e.target.value
+    style={popupInput}
+  />
+
+  <span
+    onMouseDown={() =>
+      setShowConfirmPassword(
+        true
       )
     }
-    required
+    onMouseUp={() =>
+      setShowConfirmPassword(
+        false
+      )
+    }
+    onMouseLeave={() =>
+      setShowConfirmPassword(
+        false
+      )
+    }
     style={{
-      ...inputStyle,
-      marginBottom: 0
+      position: "absolute",
+      right: "15px",
+      top: "35%",
+      cursor: "pointer",
+      color: "#4F46E5"
     }}
-  />
+  >
+    {showConfirmPassword
+      ? <FaEyeSlash />
+      : <FaEye />}
+  </span>
+</div>
+
+<div
+  style={{
+    position: "relative",
+    marginBottom: "15px"
+  }}
+>
+ <input
+  type={
+    showPassword
+      ? "text"
+      : "password"
+  }
+  name="password"
+  placeholder="Password"
+  value={formData.password}
+  onChange={handleChange}
+  required
+  style={{
+    ...popupInput,
+    marginBottom: 0
+  }}
+/>
 
   <span
     onMouseDown={() =>
@@ -328,19 +363,20 @@ function Register() {
       top: "50%",
       transform:
         "translateY(-50%)",
-      cursor: "pointer"
+      cursor: "pointer",
+      color: "#4F46E5"
     }}
   >
     {showConfirmPassword
- ? <FaEyeSlash />
- : <FaEye />}
+      ? <FaEyeSlash />
+      : <FaEye />}
   </span>
 </div>
 
         <select
           name="role"
           onChange={handleChange}
-          style={inputStyle}
+          style={popupInput}
         >
           <option value="student">
             👨‍🎓 Student
@@ -383,27 +419,19 @@ function Register() {
   );
 }
 
-const inputStyle = {
-  width: "100%",
-  padding: "12px",
-  marginBottom: "15px",
-  border:
-    "1px solid #ddd",
-  borderRadius: "10px",
-  boxSizing:
-    "border-box"
-};
-
 const btnStyle = {
   width: "100%",
-  padding: "12px",
+  padding: "14px",
   background:
-    "#2563eb",
+    "linear-gradient(135deg,#2563EB,#4F46E5)",
   color: "#fff",
   border: "none",
-  borderRadius: "10px",
+  borderRadius: "12px",
   cursor: "pointer",
-  fontWeight: "600"
+  fontWeight: "700",
+  fontSize: "16px",
+  boxShadow:
+    "0 10px 25px rgba(79,70,229,0.3)"
 };
 
 const featureStyle = {
@@ -412,6 +440,19 @@ const featureStyle = {
   padding: "15px",
   borderRadius: "12px",
   fontWeight: "600"
+};
+
+const popupInput = {
+  width: "100%",
+  padding: "14px",
+  marginBottom: "15px",
+  border: "1px solid #CBD5E1",
+  borderRadius: "12px",
+  boxSizing: "border-box",
+  background: "#F8FAFC",
+  color: "#1E293B",
+  fontSize: "15px",
+  outline: "none"
 };
 
 export default Register;
