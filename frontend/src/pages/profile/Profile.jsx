@@ -6,6 +6,8 @@ import {
   FaEye,
   FaEyeSlash
 } from "react-icons/fa";
+import { toast } from "react-toastify";
+
 
 function Profile() {
 
@@ -67,7 +69,7 @@ const [showConfirmPassword,
           )
         );
 
-        alert(
+        toast.success(
           "Profile Updated Successfully"
         );
 
@@ -75,7 +77,7 @@ const [showConfirmPassword,
 
         console.log(error);
 
-        alert(
+        toast.error(
           "Update Failed"
         );
       }
@@ -106,7 +108,7 @@ const [showConfirmPassword,
   }
 );
 
-      alert(
+      toast.success(
         "Password Changed Successfully"
       );
 
@@ -122,7 +124,7 @@ const [showConfirmPassword,
 
     } catch (error) {
 
-      alert(
+      toast.error(
         error.response?.data?.message ||
         "Failed to change password"
       );
@@ -321,22 +323,35 @@ const [showConfirmPassword,
           >
 
             <button
-              onClick={handleUpdate}
-              style={{
-                flex: 1,
-                background:
-                  "linear-gradient(135deg,#2563EB,#3B82F6)",
-                color: "#fff",
-                border: "none",
-                padding: "14px",
-                borderRadius: "12px",
-                cursor: "pointer",
-                fontSize: "15px",
-                fontWeight: "600"
-              }}
-            >
-              Save Changes
-            </button>
+  onClick={handleUpdate}
+  style={{
+    flex: 1,
+    background:
+      "linear-gradient(135deg,#2563EB,#3B82F6)",
+    color: "#fff",
+    border: "none",
+    padding: "14px",
+    borderRadius: "12px",
+    cursor: "pointer",
+    fontSize: "15px",
+    fontWeight: "600",
+    transition: "all 0.3s ease"
+  }}
+  onMouseEnter={(e) => {
+    e.currentTarget.style.transform =
+      "translateY(-3px)";
+    e.currentTarget.style.boxShadow =
+      "0 12px 25px rgba(37,99,235,0.4)";
+  }}
+  onMouseLeave={(e) => {
+    e.currentTarget.style.transform =
+      "translateY(0)";
+    e.currentTarget.style.boxShadow =
+      "none";
+  }}
+>
+  Save Changes
+</button>
 
            <button
   type="button"
@@ -355,7 +370,28 @@ const [showConfirmPassword,
     borderRadius: "12px",
     cursor: "pointer",
     fontSize: "15px",
-    fontWeight: "600"
+    fontWeight: "600",
+    transition: "all 0.3s ease"
+  }}
+  onMouseEnter={(e) => {
+    e.currentTarget.style.transform =
+      "translateY(-3px)";
+    e.currentTarget.style.background =
+      "#2563EB";
+    e.currentTarget.style.color =
+      "#fff";
+    e.currentTarget.style.boxShadow =
+      "0 12px 25px rgba(37,99,235,0.3)";
+  }}
+  onMouseLeave={(e) => {
+    e.currentTarget.style.transform =
+      "translateY(0)";
+    e.currentTarget.style.background =
+      "#fff";
+    e.currentTarget.style.color =
+      "#2563EB";
+    e.currentTarget.style.boxShadow =
+      "none";
   }}
 >
   Change Password

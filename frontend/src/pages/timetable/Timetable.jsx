@@ -198,7 +198,7 @@ function Timetable() {
             formData
           );
 
-          alert(
+          toast.success(
             "Timetable Updated Successfully"
           );
 
@@ -215,9 +215,13 @@ function Timetable() {
             formData
           );
 
-          alert(
+          toast.success(
             "Timetable Added Successfully"
           );
+
+          navigate(
+  "/timetable-list"
+);
         }
 
         setFormData({
@@ -437,23 +441,36 @@ function Timetable() {
       </div>
 
       <button
-        type="submit"
-        style={{
-          width: "100%",
-          marginTop: "25px",
-          background:
-            "linear-gradient(135deg,#2563EB,#3B82F6)",
-          color: "#fff",
-          border: "none",
-          padding: "14px",
-          borderRadius: "12px",
-          fontSize: "16px",
-          fontWeight: "600",
-          cursor: "pointer",
-          boxShadow:
-            "0 6px 15px rgba(37,99,235,0.3)"
-        }}
-      >
+  type="submit"
+  style={{
+    width: "100%",
+    marginTop: "25px",
+    background:
+      "linear-gradient(135deg,#2563EB,#3B82F6)",
+    color: "#fff",
+    border: "none",
+    padding: "14px",
+    borderRadius: "12px",
+    fontSize: "16px",
+    fontWeight: "600",
+    cursor: "pointer",
+    boxShadow:
+      "0 6px 15px rgba(37,99,235,0.3)",
+    transition: "all 0.3s ease"
+  }}
+  onMouseEnter={(e) => {
+    e.currentTarget.style.transform =
+      "translateY(-3px)";
+    e.currentTarget.style.boxShadow =
+      "0 12px 25px rgba(37,99,235,0.4)";
+  }}
+  onMouseLeave={(e) => {
+    e.currentTarget.style.transform =
+      "translateY(0)";
+    e.currentTarget.style.boxShadow =
+      "0 6px 15px rgba(37,99,235,0.3)";
+  }}
+>
         {editId
           ? "Update Timetable"
           : "Add Timetable"}
