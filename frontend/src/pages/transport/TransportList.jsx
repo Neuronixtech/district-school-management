@@ -5,6 +5,7 @@ import API from "../../api/axios";
 import DashboardLayout from "../../layouts/DashboardLayout";
 import TableHeader from "../../components/TableHeader";
 import DataTable from "../../components/DataTable";
+import { toast } from "react-toastify";
 
 function TransportList() {
   const navigate = useNavigate();
@@ -22,7 +23,7 @@ function TransportList() {
       try {
         const res =
           await API.get(
-            "/transports/all"
+            "/transport/all"
           );
 
           console.log(res.data);
@@ -86,7 +87,7 @@ function TransportList() {
           `/transports/delete/${id}`
         );
 
-        alert(
+        toast.success(
           "Transport Deleted Successfully"
         );
 

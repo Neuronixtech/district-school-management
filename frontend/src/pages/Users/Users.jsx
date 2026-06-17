@@ -11,6 +11,10 @@ useSearchParams
 import API from "../../api/axios";
 import DashboardLayout from "../../layouts/DashboardLayout";
 import { toast } from "react-toastify";
+import {
+  FaEye,
+  FaEyeSlash
+} from "react-icons/fa";
 
 function Users() {
 
@@ -28,6 +32,10 @@ searchParams.get("id");
 const [schools,
 setSchools] =
 useState([]);
+
+const [showPassword,
+  setShowPassword] =
+  useState(false);
 
 const [formData,
 setFormData] =
@@ -253,17 +261,57 @@ return (
           style={inputStyle}
         />
 
-        {!id && (
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-            style={inputStyle}
-          />
-        )}
+       <div
+  style={{
+    position: "relative"
+  }}
+>
+  <input
+  type={
+    showPassword
+      ? "text"
+      : "password"
+  }
+  name="password"
+  value={formData.password}
+  onChange={handleChange}
+  placeholder="Password"
+  style={{
+    width: "100%",
+    height: "46px",
+    padding: "0 40px 0 12px",
+    border: "1px solid #cbd5e1",
+    borderRadius: "8px",
+    boxSizing: "border-box"
+  }}
+/>
+
+  <span
+    onMouseDown={() =>
+      setShowPassword(true)
+    }
+    onMouseUp={() =>
+      setShowPassword(false)
+    }
+    onMouseLeave={() =>
+      setShowPassword(false)
+    }
+   style={{
+  position: "absolute",
+  right: "12px",
+  top: "50%",
+  transform: "translateY(-50%)",
+  cursor: "pointer",
+  color: "#4F46E5",
+  display: "flex",
+  alignItems: "center"
+}}
+>
+    {showPassword
+      ? <FaEyeSlash />
+      : <FaEye />}
+  </span>
+</div>
 
         <select
           name="role"

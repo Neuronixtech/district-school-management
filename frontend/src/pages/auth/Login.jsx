@@ -935,7 +935,7 @@ onClick={handleRegister}
     style={{
       color: "white",
       cursor: "pointer",
-      fontWeight: "12000",
+      fontWeight: "bold",
        textDecoration:
         "underline"
     }}

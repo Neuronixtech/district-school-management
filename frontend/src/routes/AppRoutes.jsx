@@ -483,7 +483,8 @@ function AppRoutes() {
         "district_admin",
         "school_admin",
         "teacher",
-        "student"
+        "student",
+        "parent"
       ]}
     >
       <EventList />

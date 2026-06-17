@@ -58,7 +58,7 @@ app.use("/api/attendance", attendanceRoutes);
 app.use("/api/fees", feeRoutes);
 app.use("/api/exams", examRoutes);
 app.use("/api/timetable", timetableRoutes);
-app.use("/api/transports", transportRoutes);
+app.use("/api/transport", transportRoutes);
 app.use("/api/hostel", hostelRoutes);
 app.use("/api/notifications",notificationRoutes);
 app.use("/api/portal", portalRoutes);

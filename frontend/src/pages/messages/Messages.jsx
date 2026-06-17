@@ -41,9 +41,15 @@ function Message() {
     setUsers
   ] = useState([]);
 
-  useEffect(() => {
-    fetchUsers();
-  }, []);
+useEffect(() => {
+
+  fetchUsers();
+
+  if (messageId) {
+    getSingleMessage();
+  }
+
+}, [messageId]);
 
   const fetchUsers =
     async () => {
@@ -63,6 +69,45 @@ function Message() {
         console.log(error);
       }
     };
+
+    const getSingleMessage =
+  async () => {
+
+    try {
+
+      const res =
+        await API.get(
+          "/messages/inbox"
+        );
+
+      const message =
+        res.data.inbox.find(
+          (msg) =>
+            msg._id ===
+            messageId
+        );
+
+      if (message) {
+
+        setFormData({
+          receiverId:
+            message.receiverId?._id || "",
+          title:
+            message.title || "",
+          message:
+            message.message || "",
+          messageType:
+            message.messageType ||
+            "general"
+        });
+      }
+
+    } catch (error) {
+
+      console.log(error);
+
+    }
+  };
 
   const handleChange =
     (e) => {
@@ -90,7 +135,7 @@ function Message() {
             formData
           );
 
-          alert(
+          toast.success(
             "Message Updated"
           );
 
@@ -101,7 +146,7 @@ function Message() {
             formData
           );
 
-          alert(
+          toast.success(
             "Message Sent"
           );
         }
@@ -256,24 +301,37 @@ function Message() {
         }}
       />
 
-      <button
-        type="submit"
-        style={{
-          width: "100%",
-          marginTop: "25px",
-          background:
-            "linear-gradient(135deg,#2563EB,#3B82F6)",
-          color: "#fff",
-          border: "none",
-          padding: "14px",
-          borderRadius: "12px",
-          fontSize: "16px",
-          fontWeight: "600",
-          cursor: "pointer",
-          boxShadow:
-            "0 6px 15px rgba(37,99,235,0.3)"
-        }}
-      >
+     <button
+  type="submit"
+  style={{
+    width: "100%",
+    marginTop: "25px",
+    background:
+      "linear-gradient(135deg,#2563EB,#3B82F6)",
+    color: "#fff",
+    border: "none",
+    padding: "14px",
+    borderRadius: "12px",
+    fontSize: "16px",
+    fontWeight: "600",
+    cursor: "pointer",
+    boxShadow:
+      "0 6px 15px rgba(37,99,235,0.3)",
+    transition: "all 0.3s ease"
+  }}
+  onMouseEnter={(e) => {
+    e.currentTarget.style.transform =
+      "translateY(-3px)";
+    e.currentTarget.style.boxShadow =
+      "0 12px 25px rgba(37,99,235,0.4)";
+  }}
+  onMouseLeave={(e) => {
+    e.currentTarget.style.transform =
+      "translateY(0)";
+    e.currentTarget.style.boxShadow =
+      "0 6px 15px rgba(37,99,235,0.3)";
+  }}
+>
         {messageId
           ? "Update Message"
           : "Send Message"}
