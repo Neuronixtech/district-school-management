@@ -11,6 +11,7 @@ import API from "../../api/axios";
 import DashboardLayout from "../../layouts/DashboardLayout";
 import TableHeader from "../../components/TableHeader";
 import DataTable from "../../components/DataTable";
+import { toast } from "react-toastify";
 
 function AttendanceList() {
 
@@ -98,7 +99,7 @@ function AttendanceList() {
           `/attendance/delete/${id}`
         );
 
-        alert(
+        toast.success(
           "Attendance Deleted Successfully"
         );
 
@@ -205,7 +206,13 @@ function AttendanceList() {
       >
         + Add Attendance
       </button>
-
+      
+      <div
+  style={{
+    overflowX: "auto",
+    width: "100%"
+  }}
+>
       <DataTable
         columns={columns}
         data={
@@ -263,8 +270,10 @@ function AttendanceList() {
               Delete
             </button>
           </>
+          
         )}
       />
+      </div>
 
     </DashboardLayout>
   );

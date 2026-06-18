@@ -186,6 +186,12 @@ function TransportList() {
         + Add Transport
       </button>
 
+      <div
+  style={{
+    overflowX: "auto",
+    width: "100%"
+  }}
+>
       <DataTable
         columns={columns}
         data={filteredTransport}
@@ -243,6 +249,7 @@ function TransportList() {
           </>
         )}
       />
+      </div>
 
     </DashboardLayout>
   );

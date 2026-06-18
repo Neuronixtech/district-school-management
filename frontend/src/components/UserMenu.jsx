@@ -1,19 +1,63 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { FaUserCircle } from "react-icons/fa";
+import {
+  useState,
+  useEffect,
+  useRef
+} from "react";
+
+import {
+  useNavigate
+} from "react-router-dom";
+
+import {
+  FaUserCircle
+} from "react-icons/fa";
 
 function UserMenu() {
-  const navigate = useNavigate();
+
+  const navigate =
+    useNavigate();
 
   const [open, setOpen] =
     useState(false);
 
+  const menuRef =
+    useRef(null);
+
   const user = JSON.parse(
-  localStorage.getItem("user") ||
-  sessionStorage.getItem("user")
-);
+    localStorage.getItem("user") ||
+    sessionStorage.getItem("user")
+  );
+
+  useEffect(() => {
+
+    const handleClickOutside =
+      (event) => {
+
+        if (
+          menuRef.current &&
+          !menuRef.current.contains(
+            event.target
+          )
+        ) {
+          setOpen(false);
+        }
+      };
+
+    document.addEventListener(
+      "mousedown",
+      handleClickOutside
+    );
+
+    return () =>
+      document.removeEventListener(
+        "mousedown",
+        handleClickOutside
+      );
+
+  }, []);
 
   const handleLogout = () => {
+
     localStorage.removeItem(
       "token"
     );
@@ -22,47 +66,66 @@ function UserMenu() {
       "user"
     );
 
+    sessionStorage.removeItem(
+      "token"
+    );
+
+    sessionStorage.removeItem(
+      "user"
+    );
+
     navigate("/");
   };
 
   return (
     <div
-  style={{
-    position: "relative"
-  }}
->
-     <FaUserCircle
-  size={40}
-  color="#38bdf8"
-  style={{
-    cursor: "pointer",
-    transition: "all 0.3s ease"
-  }}
-  onClick={() =>
-    setOpen(true)
-  }
-/>
+      ref={menuRef}
+      style={{
+        position: "relative"
+      }}
+    >
+
+      <FaUserCircle
+        size={40}
+        color="#38bdf8"
+        style={{
+          cursor: "pointer",
+          transition:
+            "all 0.3s ease"
+        }}
+        onClick={() =>
+          setOpen(!open)
+        }
+      />
 
       {open && (
-  <div
-    onMouseLeave={() =>
-      setOpen(false)
-    }
-    style={{
-      position: "absolute",
-      right: 0,
-      top: "50px",
-      width: "220px",
-      background: "#fff",
-      borderRadius: "12px",
-      boxShadow:
-        "0 8px 25px rgba(0,0,0,0.15)",
-      overflow: "hidden",
-      zIndex: 999
-    }}
-  >
+
+        <div
+          style={{
+            position:
+              "absolute",
+            right: 0,
+            top: "50px",
+            width: "220px",
+            background:
+              "#fff",
+            borderRadius:
+              "12px",
+            boxShadow:
+              "0 8px 25px rgba(0,0,0,0.15)",
+            overflow:
+              "hidden",
+            zIndex: 999
+          }}
+        >
+
           <div
             style={{
+              display: "flex",
+              justifyContent:
+                "space-between",
+              alignItems:
+                "center",
               padding: "15px",
               borderBottom:
                 "1px solid #eee",
@@ -70,107 +133,92 @@ function UserMenu() {
                 "#f8fafc"
             }}
           >
-            <strong>
-              {user?.name}
-            </strong>
+            <div>
+              <strong>
+                {user?.name}
+              </strong>
 
-            <p
+              <p
+                style={{
+                  margin: 0,
+                  fontSize:
+                    "12px",
+                  color:
+                    "#6b7280"
+                }}
+              >
+                {user?.role}
+              </p>
+            </div>
+
+            <button
+              onClick={() =>
+                setOpen(false)
+              }
               style={{
-                margin: 0,
-                fontSize: "12px",
-                color:
-                  "#6b7280"
+                border: "none",
+                background:
+                  "transparent",
+                cursor:
+                  "pointer",
+                fontSize:
+                  "18px"
               }}
             >
-              {user?.role}
-            </p>
+              ✖
+            </button>
           </div>
 
           <div
-            style={{
-              padding: "12px 15px",
-              cursor: "pointer",
-              transition:
-                "all 0.3s ease"
+            style={menuItem}
+            onClick={() => {
+              setOpen(false);
+              navigate(
+                "/profile"
+              );
             }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background =
-                "#EFF6FF";
-              e.currentTarget.style.paddingLeft =
-                "20px";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background =
-                "#fff";
-              e.currentTarget.style.paddingLeft =
-                "15px";
-            }}
-           onClick={() => {
-  setOpen(false);
-  navigate("/profile");
-}}
           >
             My Profile
           </div>
 
           <div
-            style={{
-              padding: "12px 15px",
-              cursor: "pointer",
-              transition:
-                "all 0.3s ease"
+            style={menuItem}
+            onClick={() => {
+              setOpen(false);
+              navigate(
+                "/settings"
+              );
             }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background =
-                "#EFF6FF";
-              e.currentTarget.style.paddingLeft =
-                "20px";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background =
-                "#fff";
-              e.currentTarget.style.paddingLeft =
-                "15px";
-            }}
-           onClick={() => {
-  setOpen(false);
-  navigate("/settings");
-}}
           >
             Settings
           </div>
 
           <div
             style={{
-              padding: "12px 15px",
-              color: "red",
-              cursor: "pointer",
-              transition:
-                "all 0.3s ease"
+              ...menuItem,
+              color: "red"
             }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background =
-                "#FEF2F2";
-              e.currentTarget.style.paddingLeft =
-                "20px";
+            onClick={() => {
+              setOpen(false);
+              handleLogout();
             }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background =
-                "#fff";
-              e.currentTarget.style.paddingLeft =
-                "15px";
-            }}
-           onClick={() => {
-  setOpen(false);
-  handleLogout();
-}}
           >
             Logout
           </div>
+
         </div>
+
       )}
+
     </div>
   );
 }
+
+const menuItem = {
+  padding: "12px 15px",
+  cursor: "pointer",
+  borderBottom:
+    "1px solid #f3f4f6"
+};
 
 export default UserMenu;

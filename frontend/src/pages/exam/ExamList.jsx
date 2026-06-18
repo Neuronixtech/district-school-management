@@ -11,6 +11,7 @@ import API from "../../api/axios";
 import DashboardLayout from "../../layouts/DashboardLayout";
 import TableHeader from "../../components/TableHeader";
 import DataTable from "../../components/DataTable";
+import { toast } from "react-toastify";
 
 function ExamList() {
 
@@ -100,7 +101,7 @@ function ExamList() {
           `/exams/delete/${id}`
         );
 
-        alert(
+        toast.success(
           "Exam Deleted Successfully"
         );
 
@@ -196,6 +197,12 @@ function ExamList() {
         + Add Exam
       </button>
 
+      <div
+  style={{
+    overflowX: "auto",
+    width: "100%"
+  }}
+>
       <DataTable
         columns={columns}
         data={
@@ -255,6 +262,7 @@ function ExamList() {
           </>
         )}
       />
+      </div>
 
     </DashboardLayout>
   );

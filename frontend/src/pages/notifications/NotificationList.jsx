@@ -5,6 +5,7 @@ import API from "../../api/axios";
 import DashboardLayout from "../../layouts/DashboardLayout";
 import TableHeader from "../../components/TableHeader";
 import DataTable from "../../components/DataTable";
+import { toast } from "react-toastify";
 
 function NotificationList() {
   const navigate = useNavigate();
@@ -273,6 +274,12 @@ function NotificationList() {
         + Add Notification
       </button>
 
+      <div
+  style={{
+    overflowX: "auto",
+    width: "100%"
+  }}
+>
       <DataTable
         columns={columns}
         data={
@@ -332,6 +339,8 @@ function NotificationList() {
           </>
         )}
       />
+      </div>
+      
     </DashboardLayout>
   );
 }

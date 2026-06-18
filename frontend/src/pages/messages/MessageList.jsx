@@ -5,6 +5,7 @@ import API from "../../api/axios";
 import DashboardLayout from "../../layouts/DashboardLayout";
 import TableHeader from "../../components/TableHeader";
 import DataTable from "../../components/DataTable";
+import { toast } from "react-toastify";
 
 function MessageList() {
   const navigate = useNavigate();
@@ -86,7 +87,7 @@ function MessageList() {
           `/messages/delete/${id}`
         );
 
-        alert(
+        toast.success(
           "Deleted Successfully"
         );
 
@@ -157,6 +158,12 @@ function MessageList() {
         + Send Message
       </button>
 
+     <div
+  style={{
+    overflowX: "auto",
+    width: "100%"
+  }}
+>
       <DataTable
         columns={columns}
         data={filteredMessages}
@@ -210,6 +217,8 @@ function MessageList() {
           </>
         )}
       />
+      </div>
+      
     </DashboardLayout>
   );
 }

@@ -12,6 +12,8 @@ import DashboardLayout from "../../layouts/DashboardLayout";
 import DataTable from "../../components/DataTable";
 import TableHeader from "../../components/TableHeader";
 import { toast } from "react-toastify";
+import exportToExcel from "../../utils/exportToExcel";
+import exportToPDF from "../../utils/exportToPDF";
 
 function StudentList() {
 
@@ -138,109 +140,179 @@ toast.success(
     }
   ];
 
-  return (
-    <DashboardLayout>
+ return (
+  <DashboardLayout>
 
-      <TableHeader
-        title="Students"
-        count={
-          filteredStudents.length
-        }
-        onSearch={
-          handleSearch
-        }
-      />
+    <TableHeader
+      title="Students"
+      count={filteredStudents.length}
+      onSearch={handleSearch}
+    />
+
+    <div
+      style={{
+        background: "#fff",
+        padding:
+          window.innerWidth < 768
+            ? "15px"
+            : "25px",
+        borderRadius: "18px"
+      }}
+    >
+
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          gap: "10px",
+          marginBottom: "15px"
+        }}
+      >
+
+        <button
+          onClick={() =>
+            exportToExcel(
+              filteredStudents,
+              "Students"
+            )
+          }
+          style={{
+            background: "#16a34a",
+            color: "#fff",
+            border: "none",
+            padding: "10px 15px",
+            borderRadius: "8px",
+            cursor: "pointer"
+          }}
+        >
+          📊 Export Excel
+        </button>
+
+        <button
+          onClick={() =>
+            exportToPDF(
+              ["Name", "Email"],
+              filteredStudents.map(
+                (student) => [
+                  student.name,
+                  student.email
+                ]
+              ),
+              "Students"
+            )
+          }
+          style={{
+            background: "#dc2626",
+            color: "#fff",
+            border: "none",
+            padding: "10px 15px",
+            borderRadius: "8px",
+            cursor: "pointer"
+          }}
+        >
+          📄 Export PDF
+        </button>
+
+      </div>
 
       <button
-  onClick={() =>
-    navigate("/students")
-  }
-  style={{
-    background: "#2563eb",
-    color: "#fff",
-    border: "none",
-    padding: "10px 20px",
-    borderRadius: "8px",
-    cursor: "pointer",
-    marginBottom: "15px",
-    transition: "all 0.3s ease"
-  }}
-  onMouseEnter={(e) => {
-    e.currentTarget.style.transform =
-      "translateY(-3px)";
-    e.currentTarget.style.boxShadow =
-      "0 8px 20px rgba(34,197,94,0.4)";
-  }}
-  onMouseLeave={(e) => {
-    e.currentTarget.style.transform =
-      "translateY(0)";
-    e.currentTarget.style.boxShadow =
-      "none";
-  }}
->
-  + Add Student
-</button>
+        onClick={() =>
+          navigate("/students")
+        }
+        style={{
+          background: "#2563eb",
+          color: "#fff",
+          border: "none",
+          width:
+  window.innerWidth < 768
+    ? "100%"
+    : "auto",
+padding: "12px",
+          borderRadius: "8px",
+          cursor: "pointer",
+          marginBottom: "15px"
+        }}
+      >
+        + Add Student
+      </button>
 
-      <DataTable
-        columns={columns}
-        data={filteredStudents}
-       renderActions={(student) => (
-  <>
-    <button
-      onClick={() =>
-        navigate(`/student-view/${student._id}`)
-      }
-      style={{
-        background: "#2563eb",
-        color: "#fff",
-        border: "none",
-        padding: "6px 12px",
-        borderRadius: "6px",
-        marginRight: "8px",
-        cursor: "pointer"
-      }}
-    >
-      View
-    </button>
+      <div
+        style={{
+          overflowX: "auto",
+          width: "100%"
+        }}
+      >
 
-    <button
-      onClick={() =>
-        navigate(`/students?id=${student._id}`)
-      }
-      style={{
-        background: "#2563eb",
-        color: "#fff",
-        border: "none",
-        padding: "6px 12px",
-        borderRadius: "6px",
-        marginRight: "8px",
-        cursor: "pointer"
-      }}
-    >
-      Edit
-    </button>
+        <DataTable
+          columns={columns}
+          data={filteredStudents}
+          renderActions={(student) => (
+            <>
+              <button
+                onClick={() =>
+                  navigate(
+                    `/student-view/${student._id}`
+                  )
+                }
+                style={{
+                  background: "#2563eb",
+                  color: "#fff",
+                  border: "none",
+                  padding: "6px 12px",
+                  borderRadius: "6px",
+                  marginRight: "8px",
+                  cursor: "pointer"
+                }}
+              >
+                View
+              </button>
 
-    <button
-      onClick={() =>
-        handleDelete(student._id)
-      }
-      style={{
-        background: "#dc2626",
-        color: "#fff",
-        border: "none",
-        padding: "6px 12px",
-        borderRadius: "6px",
-        cursor: "pointer"
-      }}
-    >
-      Delete
-    </button>
-  </>
-)}
-      />
+              <button
+                onClick={() =>
+                  navigate(
+                    `/students?id=${student._id}`
+                  )
+                }
+                style={{
+                  background: "#2563eb",
+                  color: "#fff",
+                  border: "none",
+                  padding: "6px 12px",
+                  borderRadius: "6px",
+                  marginRight: "8px",
+                  cursor: "pointer"
+                }}
+              >
+                Edit
+              </button>
 
-    </DashboardLayout>
-  );
+              <button
+                onClick={() =>
+                  handleDelete(
+                    student._id
+                  )
+                }
+                style={{
+                  background: "#dc2626",
+                  color: "#fff",
+                  border: "none",
+                  padding: "6px 12px",
+                  borderRadius: "6px",
+                  cursor: "pointer"
+                }}
+              >
+                Delete
+              </button>
+            </>
+          )}
+        />
+
+      </div>
+
+    </div>
+
+  </DashboardLayout>
+);
 }
 
 export default StudentList;

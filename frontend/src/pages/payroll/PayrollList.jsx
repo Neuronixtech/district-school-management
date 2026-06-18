@@ -5,6 +5,7 @@ import API from "../../api/axios";
 import DashboardLayout from "../../layouts/DashboardLayout";
 import TableHeader from "../../components/TableHeader";
 import DataTable from "../../components/DataTable";
+import { toast } from "react-toastify";
 
 function PayrollList() {
   const navigate = useNavigate();
@@ -58,7 +59,7 @@ function PayrollList() {
         `/payroll/delete/${id}`
       );
 
-      alert(
+      toast.success(
         "Payroll Deleted Successfully"
       );
 
@@ -146,6 +147,12 @@ function PayrollList() {
         + Add Payroll
       </button>
 
+      <div
+  style={{
+    overflowX: "auto",
+    width: "100%"
+  }}
+>
       <DataTable
         columns={columns}
         data={filteredPayrolls}
@@ -188,6 +195,7 @@ function PayrollList() {
           </>
         )}
       />
+      </div>
 
     </DashboardLayout>
   );

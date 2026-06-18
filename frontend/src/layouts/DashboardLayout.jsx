@@ -36,6 +36,8 @@ const [sidebarOpen,
   <div
     style={{
       display: "flex",
+flexDirection:
+  mobile ? "column" : "row",
       minHeight: "100vh",
       background: "#f4f6f9"
     }}
@@ -73,7 +75,10 @@ const [sidebarOpen,
     textAlign: "center",
     padding: "20px",
     color: "#64748b",
-    fontSize: "15px",
+    fontSize:
+  window.innerWidth < 768
+    ? "12px"
+    : "15px",
     borderTop: "1px solid #e5e7eb",
     marginTop: "30px"
   }}

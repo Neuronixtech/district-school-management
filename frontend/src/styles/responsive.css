@@ -1,0 +1,79 @@
+/* Mobile */
+@media (max-width: 767px) {
+
+  .form-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .dashboard-cards {
+    grid-template-columns: 1fr !important;
+  }
+
+  .content-area {
+    padding: 15px !important;
+  }
+
+  .sidebar {
+    position: fixed;
+    left: -260px;
+    z-index: 1000;
+  }
+}
+
+/* Tablet */
+@media (min-width: 768px) and (max-width: 1023px) {
+
+  .form-grid {
+    grid-template-columns: 1fr 1fr !important;
+  }
+
+  .dashboard-cards {
+    grid-template-columns: repeat(2,1fr) !important;
+  }
+}
+
+/* Laptop */
+@media (min-width: 1024px) and (max-width: 1439px) {
+
+  .dashboard-cards {
+    grid-template-columns: repeat(3,1fr) !important;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1440px) {
+
+  .dashboard-cards {
+    grid-template-columns: repeat(4,1fr) !important;
+  }
+}
+
+/* Activities Section */
+@media (max-width: 767px) {
+
+  .activity-grid {
+    grid-template-columns:
+      1fr !important;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+
+  .activity-grid {
+    grid-template-columns:
+      1fr !important;
+  }
+}
+
+@media (max-width: 767px) {
+
+  .login-left {
+    display: none !important;
+  }
+
+  .login-card {
+    width: 95% !important;
+    max-width: 400px !important;
+    margin: auto !important;
+  }
+}

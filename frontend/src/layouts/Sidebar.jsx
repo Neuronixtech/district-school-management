@@ -1,9 +1,14 @@
-import { Link } from "react-router-dom";
+
 import { useState } from "react";
+import {
+  Link,
+  useLocation
+} from "react-router-dom";
 
 function Sidebar({
   isMobile,
-  sidebarOpen
+  sidebarOpen,
+  setSidebarOpen
 }) {
 
   const user = JSON.parse(
@@ -15,25 +20,28 @@ function Sidebar({
 
   return (
     <div
-     style={{
+   style={{
   width: "280px",
   background: "#111827",
   color: "#fff",
-  minHeight: "100vh",
-  padding: "20px",
+  height: "100vh",
+boxSizing: "border-box",
+ padding: "20px 20px 60px 20px",
   overflowY: "auto",
+  overflowX: "hidden",
+  paddingBottom: "80px",
+  scrollbarWidth: "thin",
 
   position: isMobile
     ? "fixed"
-    : "relative",
-
-  left:
-    isMobile &&
-    !sidebarOpen
-      ? "-300px"
-      : "0",
+    : "sticky",
 
   top: 0,
+
+  left:
+    isMobile && !sidebarOpen
+      ? "-300px"
+      : "0",
 
   zIndex: 1000,
 
@@ -41,15 +49,38 @@ function Sidebar({
     "all 0.3s ease"
 }}
     >
-      <h2
-        style={{
-          textAlign: "center",
-          marginBottom: "30px",
-          color: "#60A5FA"
-        }}
-      >
-        Control Center
-      </h2>
+     <div
+  style={{
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: "20px"
+  }}
+>
+  <h2
+    style={{
+      color: "#60A5FA",
+      margin: 0
+    }}
+  >
+    Control Center
+  </h2>
+
+  {isMobile && (
+    <button
+      onClick={() => setSidebarOpen(false)}
+      style={{
+        background: "transparent",
+        border: "none",
+        color: "#fff",
+        fontSize: "22px",
+        cursor: "pointer"
+      }}
+    >
+      ✖
+    </button>
+  )}
+</div>
 
       <div
         style={{
@@ -320,48 +351,90 @@ function Sidebar({
   );
 }
 
-function LinkStyle({
-  to,
-  children
-}) {
+function LinkStyle(props) {
+
+  const {
+    to,
+    children
+  } = props;
 
   const [hover, setHover] =
     useState(false);
 
+  const location =
+    useLocation();
+
+  const isActive =
+    location.pathname === to;
+
   return (
-    <Link
-      to={to}
-      onMouseEnter={() =>
-        setHover(true)
-      }
-      onMouseLeave={() =>
-        setHover(false)
-      }
-      style={{
-        textDecoration: "none",
-        color: hover
-          ? "#fff"
-          : "#E5E7EB",
-        padding: "12px 15px",
-        borderRadius: "10px",
-        background: hover
-          ? "linear-gradient(90deg,#2563EB,#3B82F6)"
-          : "#1F2937",
-        transform: hover
-          ? "translateX(8px)"
-          : "translateX(0px)",
-        boxShadow: hover
-          ? "0 4px 15px rgba(37,99,235,0.4)"
-          : "none",
-        transition:
-          "all 0.3s ease",
-        fontWeight: hover
-          ? "600"
-          : "500"
-      }}
-    >
-      {children}
-    </Link>
+   <Link
+  to={to}
+  onClick={() => {
+    if (
+      window.innerWidth < 768 &&
+      setSidebarOpen
+    ) {
+      setSidebarOpen(false);
+    }
+    <div
+  onClick={() => {
+    if (
+      isMobile &&
+      sidebarOpen
+    ) {
+      setSidebarOpen(false);
+    }
+  }}
+  style={{
+    position: "fixed",
+    inset: 0,
+    background:
+      "rgba(0,0,0,0.4)",
+    zIndex: 999
+  }}
+/>
+  }}
+  onMouseEnter={() =>
+    setHover(true)
+  }
+  onMouseLeave={() =>
+    setHover(false)
+  }
+  style={{
+    textDecoration: "none",
+    color:
+  isActive
+    ? "#fff"
+    : hover
+    ? "#fff"
+    : "#E5E7EB",
+    padding: "12px 15px",
+    borderRadius: "10px",
+    background:
+  isActive
+    ? "linear-gradient(90deg,#2563EB,#3B82F6)"
+    : hover
+    ? "linear-gradient(90deg,#2563EB,#3B82F6)"
+    : "#1F2937",
+    transform: hover
+      ? "translateX(8px)"
+      : "translateX(0px)",
+    boxShadow: hover
+      ? "0 4px 15px rgba(37,99,235,0.4)"
+      : "none",
+    transition:
+      "all 0.3s ease",
+    fontWeight:
+  isActive
+    ? "700"
+    : hover
+    ? "600"
+    : "500"
+  }}
+>
+  {children}
+</Link>
   );
 }
 

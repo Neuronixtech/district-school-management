@@ -9,6 +9,8 @@ import QuickActions from "../../components/QuickActions";
 import UpcomingEvents from "../../components/UpcomingEvents";
 import WelcomeBanner from "../../components/WelcomeBanner";
 import { toast } from "react-toastify";
+import SchoolStatsChart from "../../components/SchoolStatsChart";
+import AttendancePieChart from "../../components/AttendancePieChart";
 
 
 import {
@@ -74,12 +76,15 @@ function Dashboard() {
         }}
       >
         <h1
-          style={{
-            marginBottom: "5px"
-          }}
-        >
-          Welcome Back 👋
-        </h1>
+  style={{
+    marginBottom: "5px",
+    fontSize: "36px",
+    fontWeight: "800",
+    color: "#111827"
+  }}
+>
+  Welcome Back 👋
+</h1>
 
        <p
   style={{
@@ -108,13 +113,18 @@ function Dashboard() {
       {/* Stats */}
 
       <div
-        style={{
-          display: "grid",
-          gridTemplateColumns:
-            "repeat(auto-fit,minmax(250px,1fr))",
-          gap: "20px"
-        }}
-      >
+  className="dashboard-cards"
+  style={{
+    display: "grid",
+    gridTemplateColumns:
+  window.innerWidth < 768
+    ? "1fr"
+    : window.innerWidth < 1024
+    ? "1fr 1fr"
+    : "repeat(4,1fr)",
+    gap: "20px"
+  }}
+>
 
         <StatCard
           title="Students"
@@ -206,13 +216,86 @@ function Dashboard() {
           
       </div>
 
+      <SchoolStatsChart
+  data={[
+    {
+      name: "Students",
+      value:
+        data.totalStudents || 0
+    },
+    {
+      name: "Teachers",
+      value:
+        data.totalTeachers || 0
+    },
+    {
+      name: "Schools",
+      value:
+        data.totalSchools || 0
+    },
+    {
+      name: "Parents",
+      value:
+        data.totalParents || 0
+    },
+    {
+      name: "Events",
+      value:
+        data.totalEvents || 0
+    }
+  ]}
+/>
+<div
+  style={{
+    display: "grid",
+    gridTemplateColumns:
+      "repeat(auto-fit,minmax(250px,1fr))",
+    gap: "20px",
+    marginTop: "30px"
+  }}
+>
+  <div style={summaryCard}>
+    <h3>🎓 Students</h3>
+    <p>
+      Total Registered:
+      {data.totalStudents}
+    </p>
+  </div>
+
+  <div style={summaryCard}>
+    <h3>👨‍🏫 Teachers</h3>
+    <p>
+      Total Teachers:
+      {data.totalTeachers}
+    </p>
+  </div>
+
+  <div style={summaryCard}>
+    <h3>💰 Fees</h3>
+    <p>
+      Collection:
+      ₹{data.totalFeesCollected}
+    </p>
+  </div>
+
+  <div style={summaryCard}>
+    <h3>📅 Events</h3>
+    <p>
+      Upcoming:
+      {data.totalEvents}
+    </p>
+  </div>
+</div>
+
+<AttendancePieChart />
+
       {/* Activities + Events */}
 
       <div
   style={{
     display: "grid",
     gridTemplateColumns:
-      window.innerWidth < 768
+      window.innerWidth < 1024
         ? "1fr"
         : "2fr 1fr",
     gap: "20px",

@@ -228,6 +228,15 @@ function Payroll() {
 }
     };
 
+    const formGridStyle = {
+  display: "grid",
+  gridTemplateColumns:
+    window.innerWidth < 768
+      ? "1fr"
+      : "1fr 1fr",
+  gap: "20px"
+};
+
     const inputStyle = {
   width: "100%",
   padding: "12px 15px",
@@ -243,16 +252,20 @@ function Payroll() {
   <DashboardLayout>
 
     <div
-      style={{
-        background: "#fff",
-        padding: "35px",
-        borderRadius: "20px",
-        boxShadow:
-          "0 10px 30px rgba(0,0,0,0.08)",
-        maxWidth: "1100px",
-        margin: "0 auto"
-      }}
-    >
+  style={{
+    background: "#fff",
+    padding:
+      window.innerWidth < 768
+        ? "20px"
+        : "35px",
+    borderRadius: "20px",
+    boxShadow:
+      "0 10px 30px rgba(0,0,0,0.08)",
+    width: "100%",
+    maxWidth: "1000px",
+    margin: "0 auto"
+  }}
+>
 
       <div
         style={{
@@ -285,14 +298,7 @@ function Payroll() {
         onSubmit={handleSubmit}
       >
 
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns:
-              "1fr 1fr",
-            gap: "20px"
-          }}
-        >
+        <div style={formGridStyle}>
 
           <select
             name="teacherId"
