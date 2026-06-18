@@ -19,7 +19,7 @@ function QuickActions() {
   borderRadius: "14px",
   py: 1.2,
   fontWeight: 800,
-  fontsize: "20px",
+  fontsize: "16px",
   textTransform: "none",
   transition: "all 0.3s ease",
 
@@ -55,7 +55,18 @@ function QuickActions() {
   ⚡ Quick Actions
 </Typography>
 
-        <Stack spacing={2}>
+        <Stack
+  spacing={2}
+  sx={{
+    display: "grid",
+    gridTemplateColumns: {
+      xs: "1fr",
+      sm: "1fr 1fr",
+      md: "repeat(4,1fr)"
+    },
+    gap: 2
+  }}
+>
 
          <Button
   variant="contained"

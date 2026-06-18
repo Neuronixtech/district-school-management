@@ -29,7 +29,11 @@ function RecentActivities({
       <CardContent>
 
         <Typography
-  variant="h5"
+ variant={
+  window.innerWidth < 768
+    ? "h6"
+    : "h5"
+}
   sx={{
     fontWeight: 800,
     color: "#1e293b",
@@ -68,13 +72,18 @@ function RecentActivities({
           }
         }}
       >
-        <ListItemText
-          primary={activity}
-          primaryTypographyProps={{
-            fontWeight: 600,
-            fontSize: "15px"
-          }}
-        />
+       <ListItemText
+  primary={
+    <Typography
+      sx={{
+        fontWeight: 600,
+        fontSize: "15px"
+      }}
+    >
+      {activity}
+    </Typography>
+  }
+/>
       </ListItem>
 
       {index !==
@@ -92,11 +101,16 @@ function RecentActivities({
             <ListItem>
 
              <ListItemText
-  primary="No Recent Activities Found"
-  primaryTypographyProps={{
-    color: "#6b7280",
-    textAlign: "center"
-  }}
+  primary={
+    <Typography
+      sx={{
+        color: "#6b7280",
+        textAlign: "center"
+      }}
+    >
+      No Recent Activities Found
+    </Typography>
+  }
 />
 
             </ListItem>

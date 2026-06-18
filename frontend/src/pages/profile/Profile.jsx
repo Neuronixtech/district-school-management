@@ -49,6 +49,10 @@ const [showConfirmPassword,
   setShowConfirmPassword] =
   useState(false);
 
+const [image,
+  setImage] =
+  useState(null);
+
   const handleUpdate =
     async () => {
 
@@ -170,14 +174,28 @@ const [showConfirmPassword,
           }}
         >
 
-          <FaUserCircle
-            size={120}
-            color="#2563EB"
-            style={{
-              background: "#fff",
-              borderRadius: "50%"
-            }}
-          />
+          {image ? (
+  <img
+    src={URL.createObjectURL(image)}
+    alt="Profile"
+    style={{
+      width: "120px",
+      height: "120px",
+      borderRadius: "50%",
+      objectFit: "cover",
+      border: "5px solid #fff"
+    }}
+  />
+) : (
+  <FaUserCircle
+    size={120}
+    color="#2563EB"
+    style={{
+      background: "#fff",
+      borderRadius: "50%"
+    }}
+  />
+)}
 
           <h2
             style={{
@@ -205,8 +223,12 @@ const [showConfirmPassword,
         <div
           style={{
             display: "grid",
-            gridTemplateColumns:
-              "repeat(4,1fr)",
+           gridTemplateColumns:
+  window.innerWidth < 768
+    ? "1fr"
+    : window.innerWidth < 1024
+    ? "1fr 1fr"
+    : "repeat(4,1fr)",
             gap: "15px",
             padding: "30px"
           }}
@@ -244,13 +266,16 @@ const [showConfirmPassword,
         >
 
           <div
-            style={{
-              display: "grid",
-              gridTemplateColumns:
-                "1fr 1fr",
-              gap: "20px"
-            }}
-          >
+  className="form-grid"
+  style={{
+    display: "grid",
+    gridTemplateColumns:
+  window.innerWidth < 768
+    ? "1fr"
+    : "1fr 1fr",
+    gap: "20px"
+  }}
+>
 
             <div>
               <label>Name</label>
@@ -317,7 +342,11 @@ const [showConfirmPassword,
           <div
             style={{
               display: "flex",
-              gap: "15px",
+flexDirection:
+  window.innerWidth < 768
+    ? "column"
+    : "row",
+gap: "15px",
               marginTop: "25px"
             }}
           >
@@ -426,7 +455,10 @@ const [showConfirmPassword,
 
       <div
         style={{
-          width: "450px",
+          width:
+  window.innerWidth < 768
+    ? "90%"
+    : "450px",
           background: "#fff",
           borderRadius: "20px",
           padding: "30px",

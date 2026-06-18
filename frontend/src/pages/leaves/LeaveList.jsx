@@ -5,6 +5,7 @@ import API from "../../api/axios";
 import DashboardLayout from "../../layouts/DashboardLayout";
 import TableHeader from "../../components/TableHeader";
 import DataTable from "../../components/DataTable";
+import { toast } from "react-toastify";
 
 function LeaveList() {
   const navigate = useNavigate();
@@ -171,6 +172,12 @@ function LeaveList() {
         + Add Leave
       </button>
 
+      <div
+  style={{
+    overflowX: "auto",
+    width: "100%"
+  }}
+>
       <DataTable
         columns={columns}
         data={filteredLeaves}
@@ -253,6 +260,8 @@ function LeaveList() {
           </>
         )}
       />
+      </div>
+
     </DashboardLayout>
   );
 }

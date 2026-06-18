@@ -21,6 +21,16 @@ function Register() {
       role: "student"
     });
 
+    const [
+  showPassword,
+  setShowPassword
+] = useState(false);
+
+const [
+  showConfirmPassword,
+  setShowConfirmPassword
+] = useState(false);
+
   const [confirmPassword,
     setConfirmPassword] =
     useState("");
@@ -32,12 +42,6 @@ function Register() {
         e.target.value
     });
   };
-
-  showRegisterPassword
-setShowRegisterPassword
-
-showRegisterConfirmPassword
-setShowRegisterConfirmPassword
 
   const handleSubmit =
     async (e) => {
@@ -81,6 +85,7 @@ setShowRegisterConfirmPassword
   style={{
     minHeight: "100vh",
     display: "flex",
+flexWrap: "wrap",
     background:
       "linear-gradient(135deg,#2563EB,#4F46E5,#7C3AED)"
   }}
@@ -175,6 +180,7 @@ setShowRegisterConfirmPassword
 
       <form
         onSubmit={handleSubmit}
+        className="login-card"
        style={{
   width: "100%",
   maxWidth: "420px",

@@ -6,7 +6,10 @@ function UpcomingEvents({
     <div
       style={{
         background: "#fff",
-        padding: "20px",
+        padding:
+  window.innerWidth < 768
+    ? "15px"
+    : "20px",
         borderRadius: "18px",
         boxShadow:
           "0 8px 25px rgba(0,0,0,0.08)"
@@ -15,7 +18,10 @@ function UpcomingEvents({
 
       <h3
         style={{
-          fontSize: "22px",
+         fontSize:
+  window.innerWidth < 768
+    ? "18px"
+    : "22px",
           fontWeight: "800",
           color: "#1e293b",
           borderBottom:
@@ -39,10 +45,11 @@ function UpcomingEvents({
               style={{
                 padding: "14px",
                 marginBottom: "12px",
-                background: "#f8fafc",
+                background:
+  "linear-gradient(135deg,#ffffff,#f8fafc)",
                 borderRadius: "12px",
                 borderLeft:
-                  "4px solid #2563eb",
+  "5px solid #2563EB",
                 transition:
                   "all 0.3s ease",
                 cursor: "pointer"

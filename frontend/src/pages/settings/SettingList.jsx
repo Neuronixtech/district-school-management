@@ -5,6 +5,7 @@ import API from "../../api/axios";
 import DashboardLayout from "../../layouts/DashboardLayout";
 import TableHeader from "../../components/TableHeader";
 import DataTable from "../../components/DataTable";
+import { toast } from "react-toastify";
 
 function SettingList() {
   const navigate = useNavigate();
@@ -83,7 +84,7 @@ function SettingList() {
           `/settings/delete/${id}`
         );
 
-        alert(
+        toast.success(
           "Deleted Successfully"
         );
 
@@ -152,6 +153,12 @@ function SettingList() {
         + Add Setting
       </button>
 
+       <div
+  style={{
+    overflowX: "auto",
+    width: "100%"
+  }}
+>
       <DataTable
         columns={columns}
         data={
@@ -183,6 +190,8 @@ function SettingList() {
           </button>
         )}
       />
+      </div>
+      
     </DashboardLayout>
   );
 }

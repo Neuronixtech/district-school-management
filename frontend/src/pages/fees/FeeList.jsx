@@ -11,6 +11,7 @@ import API from "../../api/axios";
 import DashboardLayout from "../../layouts/DashboardLayout";
 import TableHeader from "../../components/TableHeader";
 import DataTable from "../../components/DataTable";
+import { toast } from "react-toastify";
 
 function FeeList() {
 
@@ -100,7 +101,7 @@ function FeeList() {
           `/fees/delete/${id}`
         );
 
-        alert(
+        toast.success(
           "Fee Deleted Successfully"
         );
 
@@ -224,7 +225,13 @@ function FeeList() {
       >
         + Add Fee
       </button>
-
+      
+      <div
+  style={{
+    overflowX: "auto",
+    width: "100%"
+  }}
+>
       <DataTable
         columns={columns}
         data={
@@ -284,6 +291,7 @@ function FeeList() {
           </>
         )}
       />
+      </div>
 
     </DashboardLayout>
   );

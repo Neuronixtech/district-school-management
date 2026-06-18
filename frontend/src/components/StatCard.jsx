@@ -19,7 +19,11 @@ function StatCard({
         {icon}
       </div>
 
-      <div>
+      <div
+  style={{
+    flex: 1
+  }}
+>
         <h4>{title}</h4>
 
         <h2

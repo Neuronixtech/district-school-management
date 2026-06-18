@@ -230,7 +230,13 @@ function EventList() {
       >
         + Add Event
       </button>
-
+      
+      <div
+  style={{
+    overflowX: "auto",
+    width: "100%"
+  }}
+>
       <DataTable
         columns={columns}
         data={filteredEvents}
@@ -288,6 +294,7 @@ function EventList() {
           </>
         )}
       />
+      </div>
 
     </DashboardLayout>
   );

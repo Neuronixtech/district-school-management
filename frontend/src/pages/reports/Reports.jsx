@@ -245,15 +245,15 @@ const filteredReport =
 
         {/* SUMMARY CARDS */}
 
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns:
-              "repeat(auto-fit,minmax(220px,1fr))",
-            gap: "20px",
-            marginBottom: "35px"
-          }}
-        >
+       <div
+  className="dashboard-cards"
+  style={{
+    display: "grid",
+    gridTemplateColumns:
+      "repeat(4,1fr)",
+    gap: "20px"
+  }}
+>
 
           <ReportCard
   icon="🎓"

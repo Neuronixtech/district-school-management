@@ -11,6 +11,7 @@ import API from "../../api/axios";
 import DashboardLayout from "../../layouts/DashboardLayout";
 import DataTable from "../../components/DataTable";
 import TableHeader from "../../components/TableHeader";
+import { toast } from "react-toastify";
 
 function SchoolList() {
 
@@ -105,7 +106,7 @@ function SchoolList() {
           `/schools/delete/${id}`
         );
 
-        alert(
+        toast.success(
           "School Deleted Successfully"
         );
 
@@ -202,6 +203,12 @@ function SchoolList() {
         + Add School
       </button>
 
+     <div
+  style={{
+    overflowX: "auto",
+    width: "100%"
+  }}
+>
       <DataTable
         columns={columns}
         data={
@@ -263,6 +270,7 @@ function SchoolList() {
           )
         }
       />
+      </div>
 
     </DashboardLayout>
   );

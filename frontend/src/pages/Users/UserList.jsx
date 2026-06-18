@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import API from "../../api/axios";
 import DashboardLayout from "../../layouts/DashboardLayout";
 import TableHeader from "../../components/TableHeader";
+import { toast } from "react-toastify";
 
 function UserList() {
   const navigate = useNavigate();
@@ -49,7 +50,8 @@ function UserList() {
     try {
       await API.delete(`/users/delete/${id}`);
 
-      alert("User Deleted Successfully");
+      toast.success
+      ("User Deleted Successfully");
 
       fetchUsers();
     } catch (error) {

@@ -7,6 +7,7 @@ import API from "../../api/axios";
 import DashboardLayout from "../../layouts/DashboardLayout";
 import TableHeader from "../../components/TableHeader";
 import DataTable from "../../components/DataTable";
+import { toast } from "react-toastify";
 
 function AuditLogList() {
 
@@ -99,7 +100,7 @@ function AuditLogList() {
           `/audit/delete/${id}`
         );
 
-        alert(
+        toast.success(
           "Deleted Successfully"
         );
 
@@ -160,7 +161,12 @@ function AuditLogList() {
           handleSearch
         }
       />
-
+      <div
+  style={{
+    overflowX: "auto",
+    width: "100%"
+  }}
+>
       <DataTable
         columns={columns}
         data={filteredLogs}
@@ -190,6 +196,7 @@ function AuditLogList() {
           </button>
         )}
       />
+      </div>
 
     </DashboardLayout>
   );

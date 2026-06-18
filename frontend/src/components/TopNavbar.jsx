@@ -18,6 +18,9 @@ function TopNavbar({
     setShowNotifications] =
     useState(false);
 
+    const [search, setSearch] =
+  useState("");
+
 
   const getNotifications =
     async () => {
@@ -41,22 +44,27 @@ function TopNavbar({
 
   return (
     <div
-      style={{
-        background: "#fff",
-        padding: "15px 25px",
-        display: "flex",
-        justifyContent:
-          "space-between",
-        alignItems: "center",
-      borderBottom: "1px solid #eee",
-        marginBottom: "20px"
-      }}
-    >
-   <div
+  style={{
+    background: "#fff",
+    padding:
+      window.innerWidth < 768
+        ? "10px"
+        : "15px 25px",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
+    borderBottom: "1px solid #eee",
+    marginBottom: "20px",
+    flexWrap: "nowrap"
+  }}
+>
+  <div
   style={{
     display: "flex",
     alignItems: "center",
-    gap: "15px"
+    gap: "10px",
+    flex: 1,
+    minWidth: 0
   }}
 >
   {isMobile && (
@@ -85,22 +93,20 @@ function TopNavbar({
   />
 
   <div>
-    <h2
-      style={{
-        color: "#2563eb",
-        margin: 0,
-        fontSize:
-          window.innerWidth < 768
-            ? "18px"
-            : "26px",
-        fontWeight: "700"
-      }}
-    >
-      District School
-      Management System
-    </h2>
+   {window.innerWidth >= 768 && (
+  <h2
+    style={{
+      color: "#2563eb",
+      margin: 0,
+      fontSize: "24px",
+      fontWeight: "700"
+    }}
+  >
+    District School ERP
+  </h2>
+)}
 
-    {window.innerWidth >= 768 && (
+    {!isMobile && (
       <small
         style={{
           color: "#6b7280",
@@ -121,6 +127,46 @@ function TopNavbar({
           position: "relative"
         }}
       >
+
+        <input
+  type="text"
+  placeholder="Search Students, Teachers..."
+  value={search}
+  onChange={(e) =>
+    setSearch(e.target.value)
+  }
+  style={{
+    width:
+  window.innerWidth < 768
+    ? "90px"
+    : "280px",
+    padding: "10px 15px",
+    border:
+      "1px solid #d1d5db",
+    borderRadius: "12px",
+    outline: "none",
+    fontSize: "14px",
+    fontSize:
+  window.innerWidth < 768
+    ? "11px"
+    : "14px"
+  }}
+/>
+
+<button
+  style={{
+    background:
+      "#2563EB",
+    color: "#fff",
+    border: "none",
+    padding:
+      "10px 15px",
+    borderRadius: "10px",
+    cursor: "pointer"
+  }}
+>
+  🔍
+</button>
 
         {/* Bell */}
         <div
@@ -191,7 +237,10 @@ function TopNavbar({
                   "absolute",
                 top: "40px",
                 right: "0",
-                width: "320px",
+                width:
+  window.innerWidth < 768
+    ? "280px"
+    : "320px",
                 background:
                   "#fff",
                 borderRadius:

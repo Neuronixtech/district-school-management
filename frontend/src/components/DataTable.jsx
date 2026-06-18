@@ -48,15 +48,20 @@ function DataTable({
       {/* Table */}
 
       <div
-        style={{
-          overflowX: "auto"
-        }}
-      >
+  style={{
+    overflowX: "auto",
+    WebkitOverflowScrolling:
+      "touch"
+  }}
+>
 
         <table
           style={{
             width: "100%",
-            minWidth: "1000px",
+           minWidth:
+  window.innerWidth < 768
+    ? "700px"
+    : "1000px",
             borderCollapse:
               "collapse"
           }}
@@ -80,12 +85,16 @@ function DataTable({
                       column.key
                     }
                     style={{
-                      padding:
-                        "16px",
+                     padding:
+  window.innerWidth < 768
+    ? "10px"
+    : "16px",
                       textAlign:
                         "left",
-                      fontSize:
-                        "14px",
+                     fontSize:
+  window.innerWidth < 768
+    ? "12px"
+    : "14px",
                       fontWeight:
                         "600"
                     }}
@@ -103,7 +112,9 @@ function DataTable({
                 <th
                   style={{
                     padding:
-                      "16px",
+  window.innerWidth < 768
+    ? "10px"
+    : "16px",
                     textAlign:
                       "center"
                   }}
@@ -154,12 +165,16 @@ function DataTable({
                             column.key
                           }
                           style={{
-                            padding:
-                              "14px 16px",
+                           padding:
+  window.innerWidth < 768
+    ? "10px"
+    : "14px 16px",
                             borderBottom:
                               "1px solid #E5E7EB",
                             fontSize:
-                              "14px",
+  window.innerWidth < 768
+    ? "12px"
+    : "14px",
                             color:
                               "#374151"
                           }}
@@ -234,51 +249,68 @@ function DataTable({
 
       {/* Footer */}
 
-      <div
-        style={{
-          display: "flex",
-          justifyContent:
-            "space-between",
-          alignItems:
-            "center",
-          padding:
-            "18px 20px",
-          borderTop:
-            "1px solid #E5E7EB",
-          background:
-            "#F9FAFB"
-        }}
-      >
+   <div
+  style={{
+    display: "flex",
+    flexDirection:
+      window.innerWidth < 768
+        ? "column"
+        : "row",
+    justifyContent:
+      "space-between",
+    alignItems:
+      window.innerWidth < 768
+        ? "flex-start"
+        : "center",
+    gap: "15px",
+    padding: "18px 20px",
+    borderTop:
+      "1px solid #E5E7EB",
+    background:
+      "#F9FAFB"
+  }}
+>
 
-        <div
-          style={{
-            color:
-              "#6B7280",
-            fontSize:
-              "14px"
-          }}
-        >
-          Showing{" "}
-          {data.length === 0
-            ? 0
-            : firstIndex + 1}
-          {" - "}
-          {Math.min(
-            lastIndex,
-            data.length
-          )}
-          {" of "}
-          {data.length}
-          {" records"}
-        </div>
+  <div
+    style={{
+      color: "#6B7280",
+      fontSize: "14px",
+      textAlign:
+        window.innerWidth < 768
+          ? "center"
+          : "left",
+      width:
+        window.innerWidth < 768
+          ? "100%"
+          : "auto"
+    }}
+  >
+    Showing{" "}
+    {data.length === 0
+      ? 0
+      : firstIndex + 1}
+    {" - "}
+    {Math.min(
+      lastIndex,
+      data.length
+    )}
+    {" of "}
+    {data.length}
+    {" records"}
+  </div>
 
-        <div
-          style={{
-            display: "flex",
-            gap: "8px"
-          }}
-        >
-
+  <div
+    style={{
+      display: "flex",
+      flexWrap: "wrap",
+      justifyContent: "center",
+      gap: "8px",
+      width:
+        window.innerWidth < 768
+          ? "100%"
+          : "auto"
+    }}
+  >
           <button
             disabled={
               currentPage ===
@@ -367,7 +399,9 @@ const pageBtn = {
   background:
     "#fff",
   padding:
-    "8px 12px",
+  window.innerWidth < 768
+    ? "6px 10px"
+    : "8px 12px",
   borderRadius:
     "8px",
   cursor:

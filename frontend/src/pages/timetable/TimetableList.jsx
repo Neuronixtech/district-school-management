@@ -11,6 +11,7 @@ import API from "../../api/axios";
 import DashboardLayout from "../../layouts/DashboardLayout";
 import TableHeader from "../../components/TableHeader";
 import DataTable from "../../components/DataTable";
+import { toast } from "react-toastify";
 
 function TimetableList() {
 
@@ -106,7 +107,7 @@ function TimetableList() {
           `/timetable/delete/${id}`
         );
 
-        alert(
+        toast.success(
           "Timetable Deleted Successfully"
         );
 
@@ -189,6 +190,12 @@ function TimetableList() {
         + Add Timetable
       </button>
 
+      <div
+  style={{
+    overflowX: "auto",
+    width: "100%"
+  }}
+>
       <DataTable
         columns={columns}
         data={
@@ -248,6 +255,7 @@ function TimetableList() {
           </>
         )}
       />
+      </div>
 
     </DashboardLayout>
   );

@@ -11,6 +11,7 @@ import API from "../../api/axios";
 import DashboardLayout from "../../layouts/DashboardLayout";
 import DataTable from "../../components/DataTable";
 import TableHeader from "../../components/TableHeader";
+import { toast } from "react-toastify";
 
 function ParentList() {
 
@@ -114,7 +115,7 @@ const data =
           `/parents/delete/${id}`
         );
 
-        alert(
+        toast.success(
           "Student Deleted Successfully"
         );
 
@@ -173,6 +174,12 @@ const data =
         }
       />
 
+      <div
+  style={{
+    overflowX: "auto",
+    width: "100%"
+  }}
+>
       <DataTable
         columns={columns}
         data={
@@ -234,6 +241,7 @@ const data =
           )
         }
       />
+      </div>
 
     </DashboardLayout>
   );

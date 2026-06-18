@@ -11,6 +11,7 @@ import API from "../../api/axios";
 import DashboardLayout from "../../layouts/DashboardLayout";
 import TableHeader from "../../components/TableHeader";
 import DataTable from "../../components/DataTable";
+import { toast } from "react-toastify";
 
 function HostelList() {
 
@@ -100,7 +101,7 @@ function HostelList() {
           `/hostel/delete/${id}`
         );
 
-        alert(
+        toast.success(
           "Hostel Deleted Successfully"
         );
 
@@ -204,6 +205,12 @@ function HostelList() {
         + Add Hostel
       </button>
 
+      <div
+  style={{
+    overflowX: "auto",
+    width: "100%"
+  }}
+>
       <DataTable
         columns={columns}
         data={filteredHostels}
@@ -261,6 +268,7 @@ function HostelList() {
           </>
         )}
       />
+      </div>
 
     </DashboardLayout>
   );

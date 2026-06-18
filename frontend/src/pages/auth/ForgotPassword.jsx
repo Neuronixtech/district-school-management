@@ -50,10 +50,11 @@ function ForgotPassword() {
           handleSubmit
         }
         style={{
-          width: "400px",
+         width: "90%",
+maxWidth: "400px",
           background:
             "#fff",
-          padding: "30px",
+          padding: "20px",
           borderRadius:
             "15px",
           boxShadow:

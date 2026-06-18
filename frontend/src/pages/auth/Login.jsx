@@ -218,11 +218,12 @@ const [
 
   return (
   <div
-    style={{
-      minHeight: "100vh",
-      display: "flex",
-      background:
-        "linear-gradient(135deg,#2563EB,#4F46E5,#7C3AED)",
+   style={{
+    minHeight: "100vh",
+    display: "flex",
+    flexWrap: "wrap",
+    background:
+      "linear-gradient(135deg,#2563EB,#4F46E5,#7C3AED)",
       position: "relative",
       overflow: "hidden"
     }}
@@ -259,20 +260,26 @@ const [
     {/* LEFT */}
 
     <div
-      style={{
-        flex: 1,
-        padding: "80px",
-        color: "#fff",
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "center",
-        zIndex: 2
-      }}
-    >
+  className="login-left"
+  style={{
+    flex: 1,
+   padding:
+  window.innerWidth < 768
+    ? "20px"
+    : "80px",
+    color: "#fff",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center"
+  }}
+>
 
       <h1
   style={{
-    fontSize: "64px",
+    fontSize:
+  window.innerWidth < 768
+    ? "32px"
+    : "64px",
     fontWeight: "800",
     letterSpacing: "2px",
     marginBottom: "15px"
@@ -310,7 +317,9 @@ const [
         style={{
           display: "grid",
           gridTemplateColumns:
-            "repeat(2,1fr)",
+  window.innerWidth < 768
+    ? "1fr"
+    : "repeat(2,1fr)",
           gap: "15px",
           marginTop: "40px",
           maxWidth: "600px",
@@ -355,7 +364,8 @@ const [
             "1px solid rgba(255,255,255,0.2)",
           borderRadius: "20px",
           padding: "25px",
-          width: "500px",
+         width: "100%",
+maxWidth: "500px",
           fontSize: "18px",
         }}
       >
@@ -367,8 +377,10 @@ const [
         <div
           style={{
             display: "grid",
-            gridTemplateColumns:
-              "repeat(2,1fr)",
+gridTemplateColumns:
+  window.innerWidth < 768
+    ? "1fr"
+    : "repeat(2,1fr)",
             gap: "15px",
             marginTop: "15px",
             fontSize: "17px",
@@ -413,7 +425,10 @@ const [
   >
     <div
       style={{
-  width: "480px",
+  width:
+  window.innerWidth < 768
+    ? "90%"
+    : "480px",
  background:
   "rgba(255,255,255,0.15)",
 backdropFilter:
@@ -466,7 +481,8 @@ color:"#fff",
     borderRadius: "50%",
     background:
       "linear-gradient(135deg,#2563EB,#7C3AED)",
-    display: "flex",
+   display: "flex",
+flexWrap: "wrap",
     alignItems: "center",
     justifyContent: "center",
     fontSize: "45px",
@@ -691,13 +707,14 @@ onClick={handleRegister}
     {/* RIGHT LOGIN */}
 
    <div
-  style={{
-    width: "450px",
-    display: "flex",
-    justifyContent: "flex-start",
-    alignItems: "center",
-    marginRight: "160px"
-  }}
+ style={{
+  flex: 1,
+  minWidth: "320px",
+  display: "flex",
+  justifyContent: "center",
+  alignItems: "center",
+  padding: "20px"
+}}
 >
 
       <div
@@ -710,7 +727,10 @@ onClick={handleRegister}
           border:
             "1px solid rgba(255,255,255,0.2)",
           borderRadius: "25px",
-          padding: "40px",
+          padding:
+  window.innerWidth < 768
+    ? "25px"
+    : "40px",
           color: "#fff",
           boxShadow:
             "0 25px 50px rgba(0,0,0,0.25)"
@@ -746,7 +766,10 @@ onClick={handleRegister}
     style={{
       margin: "15px 0 8px",
       color: "#fff",
-      fontSize: "32px",
+      fontSize:
+  window.innerWidth < 768
+    ? "24px"
+    : "32px",
       fontWeight: "700"
     }}
   >
@@ -843,8 +866,9 @@ onClick={handleRegister}
 <div
   style={{
     display: "flex",
-    justifyContent:
-      "space-between",
+justifyContent: "space-between",
+flexWrap: "wrap",
+gap: "10px",
     alignItems: "center",
     marginBottom: "20px",
     fontSize: "16px"
