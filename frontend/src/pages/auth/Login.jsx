@@ -1,8 +1,15 @@
-import { useState } from "react";
+
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import {
+  Link,
+  useNavigate
+} from "react-router-dom";
 import API from "../../api/axios";
 import { toast } from "react-toastify";
+import {
+  useState,
+  useEffect
+} from "react";
 
 function Login() {
 
@@ -21,11 +28,6 @@ function Login() {
 const [rememberMe,
   setRememberMe] =
   useState(false);
-
-  const [
-  showForgotPassword,
-  setShowForgotPassword
-] = useState(false);
 
 const [showRegister,
   setShowRegister] =
@@ -55,14 +57,27 @@ const [showRegisterConfirmPassword,
   setShowRegisterConfirmPassword] =
   useState(false);
 
-const [
-  resetData,
-  setResetData
-] = useState({
-  email: "",
-  newPassword: "",
-  confirmPassword: ""
-});
+const [isMobile, setIsMobile] =
+  useState(window.innerWidth < 768);
+
+useEffect(() => {
+  const handleResize = () => {
+    setIsMobile(
+      window.innerWidth < 768
+    );
+  };
+
+  window.addEventListener(
+    "resize",
+    handleResize
+  );
+
+  return () =>
+    window.removeEventListener(
+      "resize",
+      handleResize
+    );
+}, []);
 
   const handleLogin = async (e) => {
 
@@ -121,55 +136,6 @@ const [
     }
   };
 
-  const handleResetPassword =
-  async () => {
-
-    if (
-      resetData.newPassword !==
-      resetData.confirmPassword
-    ) {
-
-      toast.success(
-        "Passwords do not match"
-      );
-
-      return;
-    }
-
-    try {
-
-      await API.put(
-        "/auth/reset-password",
-        {
-          email:
-            resetData.email,
-          newPassword:
-            resetData.newPassword
-        }
-      );
-
-      toast.success(
-        "Password Reset Successfully"
-      );
-
-      setShowForgotPassword(
-        false
-      );
-
-      setResetData({
-        email: "",
-        newPassword: "",
-        confirmPassword: ""
-      });
-
-    } catch (error) {
-
-      toast.error(
-        error.response?.data?.message ||
-        "Failed to Reset Password"
-      );
-    }
-  };
 
   const handleRegister =
   async () => {
@@ -264,7 +230,7 @@ const [
   style={{
     flex: 1,
    padding:
-  window.innerWidth < 768
+  isMobile
     ? "20px"
     : "80px",
     color: "#fff",
@@ -277,7 +243,7 @@ const [
       <h1
   style={{
     fontSize:
-  window.innerWidth < 768
+  isMobile
     ? "32px"
     : "64px",
     fontWeight: "800",
@@ -317,7 +283,7 @@ const [
         style={{
           display: "grid",
           gridTemplateColumns:
-  window.innerWidth < 768
+  isMobile
     ? "1fr"
     : "repeat(2,1fr)",
           gap: "15px",
@@ -378,7 +344,7 @@ maxWidth: "500px",
           style={{
             display: "grid",
 gridTemplateColumns:
-  window.innerWidth < 768
+ isMobile
     ? "1fr"
     : "repeat(2,1fr)",
             gap: "15px",
@@ -426,7 +392,7 @@ gridTemplateColumns:
     <div
       style={{
   width:
-  window.innerWidth < 768
+  isMobile
     ? "90%"
     : "480px",
  background:
@@ -559,34 +525,26 @@ flexWrap: "wrap",
     
   />
 
-  <span
-    onMouseDown={() =>
-      setShowRegisterPassword(
-        true
-      )
-    }
-    onMouseUp={() =>
-      setShowRegisterPassword(
-        false
-      )
-    }
-    onMouseLeave={() =>
-      setShowRegisterPassword(
-        false
-      )
-    }
-    style={{
-      position: "absolute",
-      right: "15px",
-      top: "35%",
-      cursor: "pointer",
-      color: "#4F46E5"
-    }}
-  >
-    {showRegisterPassword
-      ? <FaEyeSlash />
-      : <FaEye />}
-  </span>
+ <div
+  onClick={() =>
+  setShowRegisterPassword(
+    !showRegisterPassword
+  )
+}
+  style={{
+    position: "absolute",
+    right: "15px",
+    top: "50%",
+    transform:
+      "translateY(-50%)",
+    cursor: "pointer",
+    color: "#374151"
+  }}
+>
+  {showRegisterPassword
+  ? <FaEyeSlash />
+  : <FaEye />}
+</div>
 </div>
 
 <div
@@ -669,31 +627,16 @@ flexWrap: "wrap",
 
       <button
 
-       onMouseEnter={(e)=>{
-  e.target.style.transform =
-    "translateY(-3px)";
-}}
-
-onMouseLeave={(e)=>{
-  e.target.style.transform =
-    "translateY(0)";
-}}
-onClick={handleRegister}
-         style={{
-    width: "100%",
-    padding: "15px",
-    background:
-      "linear-gradient(135deg,#2563EB,#7C3AED)",
-    color: "#fff",
+    type="button"
+  onClick={handleRegister}
+  style={btnStyle}
+  style={{
+    background: "transparent",
     border: "none",
-    borderRadius: "14px",
-    cursor: "pointer",
+    color: "#fff",
     fontWeight: "700",
-    fontSize: "16px",
-    boxShadow:
-      "0 10px 25px rgba(124,58,237,0.4)",
-      transition:
-      "all 0.3s ease"
+    cursor: "pointer",
+    textDecoration: "underline"
   }}
 >
   Create Account
@@ -728,7 +671,7 @@ onClick={handleRegister}
             "1px solid rgba(255,255,255,0.2)",
           borderRadius: "25px",
           padding:
-  window.innerWidth < 768
+  isMobile
     ? "25px"
     : "40px",
           color: "#fff",
@@ -767,7 +710,7 @@ onClick={handleRegister}
       margin: "15px 0 8px",
       color: "#fff",
       fontSize:
-  window.innerWidth < 768
+  isMobile
     ? "24px"
     : "32px",
       fontWeight: "700"
@@ -837,29 +780,23 @@ onClick={handleRegister}
   />
 
   <div
-    onMouseDown={() =>
-      setShowPassword(true)
-    }
-    onMouseUp={() =>
-      setShowPassword(false)
-    }
-    onMouseLeave={() =>
-      setShowPassword(false)
-    }
-    style={{
-      position: "absolute",
-      right: "15px",
-      top: "50%",
-      transform:
-        "translateY(-50%)",
-      cursor: "pointer",
-      color: "#374151"
-    }}
-  >
-    {showPassword
-      ? <FaEyeSlash />
-      : <FaEye />}
-  </div>
+  onClick={() =>
+    setShowPassword(!showPassword)
+  }
+  style={{
+    position: "absolute",
+    right: "15px",
+    top: "50%",
+    transform:
+      "translateY(-50%)",
+    cursor: "pointer",
+    color: "#374151"
+  }}
+>
+  {showPassword
+    ? <FaEyeSlash />
+    : <FaEye />}
+</div>
 
 </div>
 
@@ -948,27 +885,29 @@ gap: "10px",
   Login
 </button>
 
-          <p
+        <p
   style={{
     textAlign: "center",
-    marginTop: "15px"
+    marginTop: "15px",
+    position: "relative",
+    zIndex: 999
   }}
 >
+  
   Don't have an account?{" "}
-  <span
-    style={{
-      color: "white",
-      cursor: "pointer",
-      fontWeight: "bold",
-       textDecoration:
-        "underline"
-    }}
-   onClick={() =>
-  setShowRegister(true)
-}
-  >
-    Create Account
-  </span>
+
+ <span
+    onClick={() => navigate("/register")}
+    type="button"
+  style={{
+    color: "#fff",
+    fontWeight: "700",
+    textDecoration: "underline",
+    cursor: "pointer"
+  }}
+>
+  Create Account
+</span>
 </p>
 
         </form>
@@ -980,21 +919,6 @@ gap: "10px",
   </div>
 );
 }
-
-const glassInput = {
-  width: "100%",
-  padding: "14px",
-  marginBottom: "18px",
-  border:
-    "1px solid rgba(255,255,255,0.3)",
-  borderRadius: "12px",
-  background:
-    "rgba(255,255,255,0.15)",
-  color: "#fff",
-  fontSize: "15px",
-  outline: "none",
-  boxSizing: "border-box"
-};
 
 const featureStyle = {
   background:
@@ -1015,6 +939,19 @@ const popupInput = {
   color: "#1E293B",
   fontSize: "15px",
   outline: "none"
+};
+
+const btnStyle = {
+  width: "100%",
+  padding: "14px",
+  background:
+    "linear-gradient(135deg,#2563EB,#7C3AED)",
+  color: "#fff",
+  border: "none",
+  borderRadius: "12px",
+  cursor: "pointer",
+  fontWeight: "700",
+  fontSize: "16px"
 };
 
 export default Login;

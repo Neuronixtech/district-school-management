@@ -289,22 +289,22 @@ function Events() {
         </select>
 
         <input
-          type="date"
-          name="startDate"
-          value={formData.startDate}
-          onChange={handleChange}
-          required
-          style={inputStyle}
-        />
+  type="text"
+  name="date"
+  placeholder="YYYY-MM-DD"
+  value={formData.date || ""}
+  onChange={handleChange}
+  style={inputStyle}
+/>
 
         <input
-          type="date"
-          name="endDate"
-          value={formData.endDate}
-          onChange={handleChange}
-          required
-          style={inputStyle}
-        />
+  type="text"
+  name="date"
+  placeholder="YYYY-MM-DD"
+  value={formData.date || ""}
+  onChange={handleChange}
+  style={inputStyle}
+/>
 
         <select
           name="schoolId"

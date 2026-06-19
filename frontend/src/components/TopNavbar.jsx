@@ -42,6 +42,50 @@ function TopNavbar({
   getNotifications();
 }, []);
 
+const handleGlobalSearch = () => {
+  const keyword = search.toLowerCase();
+
+  if (keyword.includes("student")) {
+    navigate("/student-list");
+  }
+  else if (keyword.includes("teacher")) {
+    navigate("/teacher-list");
+  }
+  else if (keyword.includes("school")) {
+    navigate("/school-list");
+  }
+  else if (keyword.includes("attendance")) {
+    navigate("/attendance-list");
+  }
+  else if (keyword.includes("fee")) {
+    navigate("/fee-list");
+  }
+  else if (keyword.includes("exam")) {
+    navigate("/exam-list");
+  }
+  else if (keyword.includes("event")) {
+    navigate("/event-list");
+  }
+  else if (keyword.includes("transport")) {
+    navigate("/transport-list");
+  }
+  else if (keyword.includes("hostel")) {
+    navigate("/hostel-list");
+  }
+  else if (keyword.includes("message")) {
+    navigate("/message-list");
+  }
+  else if (keyword.includes("notification")) {
+    navigate("/notification-list");
+  }
+  else if (keyword.includes("leave")) {
+    navigate("/leave-list");
+  }
+  else {
+    alert("No matching module found");
+  }
+};
+
   return (
     <div
   style={{
@@ -119,54 +163,65 @@ function TopNavbar({
   </div>
 </div>
 
-      <div
-        style={{
-          display: "flex",
-          gap: "20px",
-          alignItems: "center",
-          position: "relative"
-        }}
-      >
+    <div
+  style={{
+    display: "flex",
+    alignItems: "center",
+    gap: "20px",
+    position: "relative"
+  }}
+>
 
-        <input
+        <div
+  style={{
+    display: "flex",
+    alignItems: "center"
+  }}
+>
+  <input
   type="text"
   placeholder="Search Students, Teachers..."
   value={search}
   onChange={(e) =>
     setSearch(e.target.value)
   }
+  onKeyDown={(e) => {
+    if (e.key === "Enter") {
+      handleGlobalSearch();
+    }
+  }}
   style={{
     width:
-  window.innerWidth < 768
-    ? "90px"
-    : "280px",
+      window.innerWidth < 768
+        ? "90px"
+        : "280px",
     padding: "10px 15px",
-    border:
-      "1px solid #d1d5db",
-    borderRadius: "12px",
+    border: "1px solid #d1d5db",
+    borderRight: "none",
+    borderRadius: "12px 0 0 12px",
     outline: "none",
-    fontSize: "14px",
     fontSize:
-  window.innerWidth < 768
-    ? "11px"
-    : "14px"
+      window.innerWidth < 768
+        ? "11px"
+        : "14px"
   }}
 />
 
 <button
+  onClick={handleGlobalSearch}
   style={{
-    background:
-      "#2563EB",
+    background: "#2563EB",
     color: "#fff",
-    border: "none",
-    padding:
-      "10px 15px",
-    borderRadius: "10px",
-    cursor: "pointer"
+    border: "1px solid #2563EB",
+    padding: "10px 15px",
+    borderRadius: "0 12px 12px 0",
+    cursor: "pointer",
+    marginLeft: "-1px"
   }}
 >
   🔍
 </button>
+</div>
 
         {/* Bell */}
         <div
