@@ -231,8 +231,8 @@ function Timetable() {
           day: "",
           subject: "",
           teacherId: "",
-          startTime: "",
-          endTime: ""
+          startTime: "--:--",
+          endTime: "--:--"
         });
 
       } catch (error) {
@@ -426,24 +426,25 @@ function Timetable() {
           )}
         </select>
 
-        <input
-          type="time"
-          name="startTime"
-          value={formData.startTime}
-          onChange={handleChange}
-          required
-          style={inputStyle}
-        />
+      <input
+  type="text"
+  name="startTime"
+  placeholder="09:00 AM"
+  value={formData.startTime}
+  onChange={handleChange}
+  required
+  style={inputStyle}
+/>
 
-        <input
-          type="time"
-          name="endTime"
-          value={formData.endTime}
-          onChange={handleChange}
-          required
-          style={inputStyle}
-        />
-
+<input
+  type="text"
+  name="endTime"
+  placeholder="10:00 AM"
+  value={formData.endTime}
+  onChange={handleChange}
+  required
+  style={inputStyle}
+/>
       </div>
 
       <button

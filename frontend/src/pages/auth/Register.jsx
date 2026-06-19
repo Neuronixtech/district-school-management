@@ -1,4 +1,7 @@
-import { useState } from "react";
+import {
+  useState,
+  useEffect
+} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import API from "../../api/axios";
 import {
@@ -34,6 +37,28 @@ const [
   const [confirmPassword,
     setConfirmPassword] =
     useState("");
+
+    const [isMobile, setIsMobile] =
+  useState(window.innerWidth < 768);
+
+useEffect(() => {
+  const handleResize = () => {
+    setIsMobile(
+      window.innerWidth < 768
+    );
+  };
+
+  window.addEventListener(
+    "resize",
+    handleResize
+  );
+
+  return () =>
+    window.removeEventListener(
+      "resize",
+      handleResize
+    );
+}, []);
 
   const handleChange = (e) => {
     setFormData({
@@ -93,7 +118,10 @@ flexWrap: "wrap",
     <div
   style={{
     flex: 1,
-    padding: "80px",
+   padding:
+  isMobile
+    ? "20px"
+    : "80px",
     color: "#fff",
     display: "flex",
     flexDirection: "column",
@@ -102,7 +130,10 @@ flexWrap: "wrap",
 >
   <h1
     style={{
-      fontSize: "64px",
+      fontSize:
+  isMobile
+    ? "32px"
+    : "64px",
       fontWeight: "800",
       marginBottom: "15px"
     }}
@@ -215,7 +246,7 @@ flexWrap: "wrap",
           placeholder="Full Name"
           onChange={handleChange}
           required
-          style={inputStyle}
+          style={popupInput}
         />
 
         <input
@@ -224,7 +255,7 @@ flexWrap: "wrap",
           placeholder="Email"
           onChange={handleChange}
           required
-          style={inputStyle}
+          style={popupInput}
         />
 
         {/* Password */}
@@ -253,15 +284,11 @@ flexWrap: "wrap",
 />
 
   <span
-    onMouseDown={() =>
-      setShowPassword(true)
-    }
-    onMouseUp={() =>
-      setShowPassword(false)
-    }
-    onMouseLeave={() =>
-      setShowPassword(false)
-    }
+    onClick={() =>
+  setShowPassword(
+    !showPassword
+  )
+}
     style={{
       position: "absolute",
       right: "15px",
@@ -291,23 +318,19 @@ flexWrap: "wrap",
         : "password"
     }
     placeholder="Confirm Password"
+    value={confirmPassword}
+    onChange={(e) =>
+      setConfirmPassword(
+        e.target.value
+      )
+    }
     style={popupInput}
   />
 
   <span
-    onMouseDown={() =>
+    onClick={() =>
       setShowConfirmPassword(
-        true
-      )
-    }
-    onMouseUp={() =>
-      setShowConfirmPassword(
-        false
-      )
-    }
-    onMouseLeave={() =>
-      setShowConfirmPassword(
-        false
+        !showConfirmPassword
       )
     }
     style={{
@@ -324,60 +347,6 @@ flexWrap: "wrap",
   </span>
 </div>
 
-<div
-  style={{
-    position: "relative",
-    marginBottom: "15px"
-  }}
->
- <input
-  type={
-    showPassword
-      ? "text"
-      : "password"
-  }
-  name="password"
-  placeholder="Password"
-  value={formData.password}
-  onChange={handleChange}
-  required
-  style={{
-    ...popupInput,
-    marginBottom: 0
-  }}
-/>
-
-  <span
-    onMouseDown={() =>
-      setShowConfirmPassword(
-        true
-      )
-    }
-    onMouseUp={() =>
-      setShowConfirmPassword(
-        false
-      )
-    }
-    onMouseLeave={() =>
-      setShowConfirmPassword(
-        false
-      )
-    }
-    style={{
-      position: "absolute",
-      right: "15px",
-      top: "50%",
-      transform:
-        "translateY(-50%)",
-      cursor: "pointer",
-      color: "#4F46E5"
-    }}
-  >
-    {showConfirmPassword
-      ? <FaEyeSlash />
-      : <FaEye />}
-  </span>
-</div>
 
         <select
           name="role"

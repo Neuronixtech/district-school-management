@@ -362,9 +362,10 @@ const inputStyle = {
           />
 
 <input
-  type="date"
-  name="dob"
-  value={formData.dob}
+  type="text"
+  name="date"
+  placeholder="YYYY-MM-DD"
+  value={formData.date || ""}
   onChange={handleChange}
   style={inputStyle}
 />
